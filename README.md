@@ -82,9 +82,10 @@ t_shift = 0.9 ## sampling param, higher can sound better but worse WER
 num_steps = 4 ## sampling param, higher sounds better but takes longer(3-4 is best for efficiency)
 speed = 1.0 ## sampling param, controls speed of audio(lower=slower)
 return_smooth = False ## sampling param, makes it sound smoother possibly but less cleaner
+ref_duration = 5 ## Setting it lower can speedup inference, set to 1000 if you find artifacts.
 
 ## encode audio(takes 10s to init because of librosa first time)
-encoded_prompt = lux_tts.encode_prompt(prompt_audio, rms=rms)
+encoded_prompt = lux_tts.encode_prompt(prompt_audio, duration=ref_duration, rms=rms)
 
 ## generate speech
 final_wav = lux_tts.generate_speech(text, encoded_prompt, num_steps=num_steps, t_shift=t_shift, speed=speed, return_smooth=return_smooth)
